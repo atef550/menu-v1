@@ -20,17 +20,17 @@ function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-      <Stack.Navigator   initialRouteName="Shop "  screenOptions={{
-    headerShown: false
-  }}>
-        
-        <Stack.Screen name="Shop"  component={screenOne} />
-        <Stack.Screen name="Inner store"  component={shopScreen2} />
-        <Stack.Screen name="Cart"  component={cartScreen} />
-      </Stack.Navigator>
-     </NavigationContainer>
-     </Provider>
-     )
+        <Stack.Navigator initialRouteName="Shop " screenOptions={{
+          headerShown: false
+        }}>
+
+          <Stack.Screen name="Shop" component={screenOne} />
+          <Stack.Screen name="Inner store" component={shopScreen2} />
+          <Stack.Screen name="Cart" component={cartScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  )
 }
 
 
