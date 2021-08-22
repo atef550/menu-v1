@@ -6,61 +6,60 @@ import { Card } from 'react-native-paper';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { Header, Icon, withBadge } from 'react-native-elements';
 import Cart from '../components/shopingCart-component';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch} from 'react-redux';
+import {SET_CATEGORIES, SET_PRODUCTS} from '../state/action';
+import {getMainDataAC,getMainData} from '../state/action-creactor'
+import { setCategoriesReducer } from '../state/reducer';
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("window");
-const data = [{ id: 1, txt: "       Beverages", disc: 'Coffe, Tea, Juice, etc...', img: require('../assets/Coffee.jpg'), isChecked: false },
-{ id: 2, txt: 'Food', disc: "            Sandwich, Burger, Pizza, etc...", img: require('../assets/food.jpg'), isChecked: false },
-{ id: 3, txt: 'Books', img: require('../assets/books.jpg'), isChecked: false },
-];
 
-const data2 = [
-  { id: 1, count: 0, price: '10 EGP', header: 'Beverages', txt: "Coffee", disc: 'Coffe, Tea, Juice, etc...', img: require('../assets/Coffee.jpg'), isChecked: false },
-  { id: 2, count: 0, txt: 'Coffee', header: 'Beverages', price: '12 EGP', disc: "            Sandwich, Burger, Pizza, etc...", img: require('../assets/Coffee2.jpg'), isChecked: false },
-  { id: 3, count:0, txt: 'Coffee', header: 'Beverages', price: '14 EGP', img: require('../assets/Coffee3.jpg'), isChecked: false },
-];
-
-
-const data3 = [{ id: 1, header: 'Food', price: '50 EGP', txt: " chicken", disc: 'Coffe, Tea, Juice, etc...', isChecked: false },
-{ id: 2, txt: 'beef', header: 'Food', price: '40 EGP', disc: "            Sandwich, Burger, Pizza, etc...", isChecked: false },
-{ id: 3, txt: 'fish', header: 'Food', price: '60 EGP', isChecked: false },
-{ id: 4, txt: 'pizza', header: 'Food', price: '110 EGP', isChecked: false }
-];
 const screenOne = () => {
 
-  const cartItems = useSelector(state => state)
-  const [products, setProducts] = useState(data);
+  const cartItems = useSelector(state => state.cartItemsReducer)
+
   const navigation = useNavigation();
   const BadgedIcon = withBadge(1)(MaterialCommunityIcons);
-  const handleChange = (id) => {
-    let temp = products.map((product) => {
-      if (id === product.id) {
-        return { ...product, isChecked: !product.isChecked };
-      }
-      return product;
-    });
-    setProducts(temp);
-  };
+  const dispatch = useDispatch()
+  
+  
+  const setCategories = item => dispatch({ type: SET_CATEGORIES, payload: item })
+  const categories = useSelector(state => state.setCategoriesReducer)
+  useEffect( ()=>{
+     fetch('http://192.168.1.6:3000/Categories')
+    .then(res=>res.json())
+     .then(data=>setCategories(data))}); 
+     
+  
+  useEffect( ()=>{
+     fetch('http://192.168.1.6:3000/Products')
+    .then(res=>res.json())
+    .then(data=>setProducts(data))});     
+  const setProducts = item => dispatch({ type: SET_PRODUCTS, payload: item })
+  const Products = useSelector(state => state.setProductsReducer)
 
-  let selected = products.filter((product) => product.isChecked);
+const coffeeData=Products.filter(item => item.Category == "Beverages")
+
+const foodData=Products.filter(item => item.Category == "Food")
+
 
   const renderFlatList = (renderData) => {
     return (
       <FlatList
         style={{ alignSelf: 'center' }}
         numColumns={1}
+        keyExtractor={item => item.id.toString()}
         data={renderData}
         renderItem={({ item }) => (
           <Card style={styles.outercard} onPress={() => {
-            handleChange(item.id)
+          
 
             switch (item.id) {
               case 1:
-                navigation.navigate('Inner store', { flatData: data2 });
+                navigation.navigate('Inner store', { flatData: coffeeData });
                 // code block
                 break;
               case 2:
-                navigation.navigate('Inner store', { flatData: data3 });
+                navigation.navigate('Inner store', { flatData: foodData });
                 // code block
                 break;
               default:
@@ -68,12 +67,12 @@ const screenOne = () => {
             }
           }} >
 
-
-
             <ImageBackground
               style={styles.backgroundImage}
               imageStyle={{ borderRadius: 10, backgroundColor: 'rgba(255,0,0,.6)' }}
-              source={item.img}
+              //src={require( item.img )}
+              
+             source={{ uri :item.img }}
             >
               <View
                 style={{
@@ -87,8 +86,10 @@ const screenOne = () => {
               >
                 <Text style={styles.itemText}>{item.txt}</Text>
                 <View><Text style={styles.text}>{item.disc}</Text></View></View>
-            </ImageBackground>
+                
 
+            </ImageBackground>
+            
 
           </Card>
 
@@ -114,7 +115,7 @@ const screenOne = () => {
           color: "black"
         }}>What do you want to order Today?</Text>
       </View>
-      <View style={{ flex: 1, marginLeft: 10 }}>{renderFlatList(products)}</View>
+      <View style={{ flex: 1, marginLeft: 10 }}>{renderFlatList(categories)}</View>
 
     </View>
   );

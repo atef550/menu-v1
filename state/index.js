@@ -1,8 +1,11 @@
 import { combineReducers} from 'redux';
-import {loginReducer} from './reducer';
+import {cartItemsReducer,setCategoriesReducer,setProductsReducer} from './reducer'
 
-const reducers = combineReducers ({
-    reducer : loginReducer
-});
+const reducer = combineReducers ({
+    cartItemsReducer : cartItemsReducer,
+    setCategoriesReducer:setCategoriesReducer,
+    setProductsReducer : setProductsReducer
+}
+);
 
-export default reducers;
+export  {reducer};

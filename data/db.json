@@ -1,0 +1,17 @@
+ {  "Categories" : [{ "id": 1, "txt": "       Beverages", "disc": "Coffe, Tea, Juice, etc...", "img": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG", "isChecked": false },
+  { "id": 2, "txt": "Food", "disc": "            Sandwich, Burger, Pizza, etc...", "img": "https://media.istockphoto.com/photos/top-view-table-full-of-food-picture-id1220017909?k=6&m=1220017909&s=170667a&w=0&h=Zy_NqTbEluSW0T667IHW7DVlpQih70V45k-rgeFt6Oo=", "isChecked": false },
+  { "id": 3, "txt": "Books", "img": "https://ichef.bbci.co.uk/news/976/cpsprodpb/16E5/production/_114216850_mediaitem114216849.jpg", "isChecked": false }
+  ],
+  
+   
+   "Products" : [
+      { "id": 1, "count": 0, "price": "10 EGP", "Category": "Beverages", "txt": "Coffee", "disc": "'Coffe, Tea, Juice, etc...'", "img": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG", "isChecked":false },
+      { "id": 2, "count": 0, "txt": "Coffee", "Category": "Beverages", "price": "12 EGP", "disc": "            Sandwich, Burger, Pizza, etc...", "img":"https://post.healthline.com/wp-content/uploads/2020/08/coffee-worlds-biggest-source-of-antioxidants-1296x728-feature_0-732x549.jpg","isChecked":false  },
+      { "id": 3, "count":0, "txt": "Coffee", "Category": "Beverages", "price": "14 EGP", "img": "https://foolproofliving.com/wp-content/uploads/2019/03/Turkish-Coffee-Recipe-Image-500x500.jpg",  "isChecked":false  }
+    ,{ "id": 4,"count": 0, "Category": "Food", "price":" 50 EGP", "txt": " chicken", "disc": "Coffe, Tea, Juice, etc...", "isChecked":false  },
+    { "id": 5,"count": 0, "txt": "beef", "Category": "Food", "price": " 40 EGP", "disc": "            Sandwich, Burger, Pizza, etc...",  "isChecked":false },
+    { "id": 6,"count": 0, "txt": "fish", "Category": "Food", "price": " 80 EGP", "isChecked":false  },
+    { "id": 7,"count": 0, "txt":"pizza", "Category": "Food", "price": " 90 EGP",  "isChecked":false }]}
+    
+    
+    

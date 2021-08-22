@@ -13,15 +13,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, REMOVE_FROM_CART, DECREASE_AMOUNT,  } from '../state/action';
 import { initialState } from '../state/state';
 import { addToCartActionCreator } from '../state/action-creactor';
-import Counter from "react-native-counters";
+//import Counter from "react-native-counters";
+import Counter from "../components/counter";
 //import {CounterInput} from "react-native-counter-input";
 //import NumericInput from 'react-native-numeric-input'
 import InputSpinner from "react-native-input-spinner";
+
 import { adjustAmount } from '../state/action-creactor'
 
 const shopScreen2 = ({ route }) => {
   const dispatch = useDispatch()
-  const cartItems = useSelector(state => state)
+  const cartItems = useSelector(state => state.cartItemsReducer)
   const addItemToCart = item => dispatch({ type: ADD_TO_CART, payload: item })
   const removeItemFromCart = item => dispatch({ type: REMOVE_FROM_CART, payload: item })
   const decreaseAmount = item => dispatch({ type: DECREASE_AMOUNT, payload: item })
@@ -29,29 +31,25 @@ const shopScreen2 = ({ route }) => {
 
   const { flatData } = route.params;
   const navigation = useNavigation();
+  
 
-  const [products, setProducts] = useState(flatData);
-
-  console.log(cartItems)
-  //let selected = products.filter((product) => product.isChecked);
-
-  //<Text style={styles.text}>Selected </Text>
-  // <View style={{ flex: 1 }}>{renderFlatList(selected)}</View>  
+  const [products,setProducts ] = useState(flatData);
 
   return (
     <View style={styles.container}>
       <Header
         leftComponent={<Ionicons name="ios-chevron-back-sharp" size={24} color="white" onPress={navigation.goBack} />}
-        centerComponent={{ text: products[0].header, style: { fontSize: 18, color: '#fff' } }}
+        centerComponent={{ text: products[0].Category, style: { fontSize: 18, color: '#fff' } }}
         rightComponent={<Cart cartCount={cartItems.length} />}
       />
       <FlatList
         style={{ alignSelf: 'center' }}
         numColumns={2}
         data={products}
+        keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => (
           <Card style={styles.outercard}  >
-            <Image style={styles.logo} source={item.img} />
+            <Image style={styles.logo} source={{ uri :item.img }} />
             <View >
 
 
@@ -67,7 +65,8 @@ const shopScreen2 = ({ route }) => {
                    <Text style={{fontSize:16,alignSelf:'center',color:'white'}}>Add to cart</Text> 
                    </TouchableOpacity>
                  </View> : 
-               <View><InputSpinner
+               <View>
+ <InputSpinner
                   max={10}
                   min={0}
                   step={1}
@@ -77,7 +76,9 @@ const shopScreen2 = ({ route }) => {
                   //onChange={item.count}
                   onIncrease={() => addItemToCart(item)}
                   onDecrease={() => decreaseAmount(item)}
-                /></View>}
+                />
+                 
+                 </View>}
 
 
               </View>
@@ -92,8 +93,24 @@ const shopScreen2 = ({ route }) => {
     </View>
   );
 };
-// <Counter start={1}  onPress={() => addItemToCart(item)} /> 
-//     <AddToCart onPress={() => addItemToCart(item)}/>
+ 
+
+ /*
+ <Counter value={item.count} onIncrease={() => addItemToCart(item)} onDecrease={()=>removeItemFromCart(item)}></Counter> 
+
+ <InputSpinner
+                  max={10}
+                  min={0}
+                  step={1}
+                  colorMax={"#f04048"}
+                  colorMin={"#40c5f4"}
+                  value={item.count}
+                  //onChange={item.count}
+                  onIncrease={() => addItemToCart(item)}
+                  onDecrease={() => decreaseAmount(item)}
+                />
+
+ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -1,6 +1,6 @@
 import React from 'react';
 //import { StyleSheet, Text, View, TextInput, TouchableOpacity,Button } from 'react-native';
-import 'react-native-gesture-handler';
+//import 'react-native-gesture-handler';
 //import store from './state/store'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';

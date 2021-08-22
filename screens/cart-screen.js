@@ -8,6 +8,8 @@ import { ADD_TO_CART, REMOVE_FROM_CART, DECREASE_AMOUNT,  } from '../state/actio
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import Cart from '../components/shopingCart-component'
 import InputSpinner from "react-native-input-spinner";
+import Counter from "../components/counter";
+
 function Separator() {
   return <View style={{ borderBottomWidth: 1, borderBottomColor: '#a9a9a9' }} />
 }
@@ -29,7 +31,7 @@ function cartScreen() {
   
   const cartItems=convert(notFiltered);
   */
-  const cartItems = useSelector(state => state)
+  const cartItems = useSelector(state => state.cartItemsReducer)
   const dispatch = useDispatch()
   const navigation = useNavigation()
   const addItemToCart = item => dispatch({ type: ADD_TO_CART, payload: item })
@@ -78,17 +80,20 @@ function cartScreen() {
 
                   </View>
 
-                  <View><InputSpinner
+                  <View>
+                  <InputSpinner
                   max={10}
                   min={0}
                   step={1}
                   colorMax={"#f04048"}
                   colorMin={"#40c5f4"}
                   value={item.count}
-                  
+                  //onChange={item.count}
                   onIncrease={() => addItemToCart(item)}
                   onDecrease={() => decreaseAmount(item)}
-                /></View>
+                />
+
+                    </View>
                 </View>
               )}
             />

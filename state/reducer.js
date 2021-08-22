@@ -1,9 +1,9 @@
 import { initialState } from './state'
 import { Action } from 'redux'
 import * as actions from './action'
-import { ADD_TO_CART, REMOVE_FROM_CART, DECREASE_AMOUNT, ADJUST_AMOUNT } from "./action"
+import { ADD_TO_CART, REMOVE_FROM_CART, DECREASE_AMOUNT, SET_PRODUCTS,SET_CATEGORIES } from "./action"
 
-const cartItemsReducer = (state = initialState, action) => {
+const cartItemsReducer = (state = initialState.selectedItems, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       if (state.filter(item => item.id == action.payload.id).length == 0) {
@@ -30,4 +30,25 @@ const cartItemsReducer = (state = initialState, action) => {
   return state
 }
 
-export default cartItemsReducer
+
+const setCategoriesReducer = (state = initialState.categoriesData, action) => {
+  switch (action.type) {
+    case SET_CATEGORIES:
+      
+        return  action.payload
+      
+      }
+  return state
+}
+
+const setProductsReducer = (state = initialState.productsData, action) => {
+  switch (action.type) {
+    case SET_PRODUCTS:
+      
+        return  action.payload
+      
+      }
+  return state
+}
+
+export{cartItemsReducer,setCategoriesReducer,setProductsReducer}

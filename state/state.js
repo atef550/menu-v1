@@ -1,4 +1,3 @@
-export const initialState = [
-
-
-]
+export const initialState = {selectedItems:[]
+,categoriesData:[],productsData:[]
+}
