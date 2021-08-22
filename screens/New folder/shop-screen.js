@@ -3,7 +3,6 @@ import { SafeAreaView,ImageBackground, View, FlatList, StyleSheet, Text, StatusB
 //import {WelcomeTxt} from '../components/WelcomeText.component.js';
 import 'react-native-gesture-handler';
 //import {useSelector,useDispatch} from 'react-redux';
-//import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 const image = require( '../assets/Coffee-National-Coffee-Day-FT-Blog0919.jpg') ;

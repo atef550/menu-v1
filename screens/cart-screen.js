@@ -58,7 +58,7 @@ function cartScreen() {
               ItemSeparatorComponent={() => Separator()}
               renderItem={({ item }) => (
                 <View style={styles.bookItemContainer}>
-                  <Image source={item.img} style={styles.logo} />
+                  <Image source={{ uri :item.img }} style={styles.logo} />
                   <View style={styles.bookItemMetaContainer}>
                     <View>
                       <Text style={styles.textTitle} >
@@ -81,6 +81,7 @@ function cartScreen() {
                   </View>
 
                   <View>
+                  
                   <InputSpinner
                   max={10}
                   min={0}

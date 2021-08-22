@@ -59,24 +59,25 @@ const shopScreen2 = ({ route }) => {
 
                <View style={{ alignSelf: 'center', height: 64 }}>
                     
-               {item.count==0 ? <View>
+               {(item.count<1)? <View>
                  <TouchableOpacity style={{backgroundColor:'rgb(46,100,249)',padding:5,borderRadius:5,margin:5,minWidth:0,minWidth:100}}
                  onPress={() => addItemToCart(item)}> 
                    <Text style={{fontSize:16,alignSelf:'center',color:'white'}}>Add to cart</Text> 
                    </TouchableOpacity>
                  </View> : 
-               <View>
- <InputSpinner
-                  max={10}
-                  min={0}
-                  step={1}
-                  colorMax={"#f04048"}
-                  colorMin={"#40c5f4"}
-                  value={item.count}
-                  //onChange={item.count}
-                  onIncrease={() => addItemToCart(item)}
-                  onDecrease={() => decreaseAmount(item)}
-                />
+               <View> 
+                 <InputSpinner
+               max={10}
+               min={0}
+               step={1}
+               colorMax={"#f04048"}
+               colorMin={"#40c5f4"}
+               value={item.count}
+               initialValue={item.count}
+               //onChange={item.count}
+               onIncrease={() => addItemToCart(item)}
+               onDecrease={() => decreaseAmount(item)}
+             />
                  
                  </View>}
 

@@ -9,12 +9,25 @@ import Cart from '../components/shopingCart-component';
 import { useSelector ,useDispatch} from 'react-redux';
 import {SET_CATEGORIES, SET_PRODUCTS} from '../state/action';
 import {getMainDataAC,getMainData} from '../state/action-creactor'
-import { setCategoriesReducer } from '../state/reducer';
+import { setCategoriesReducer, setProductsReducer } from '../state/reducer';
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get("window");
 
 const screenOne = () => {
 
+/*
+  productData=[
+    { "id": 1, "count": 0, "price": "10 EGP", "Category": "Beverages", "txt": "Coffee", "disc": "'Coffe, Tea, Juice, etc...'", "img": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG", "isChecked":false },
+    { "id": 2, "count": 0, "txt": "Coffee", "Category": "Beverages", "price": "12 EGP", "disc": "            Sandwich, Burger, Pizza, etc...", "img":"https://post.healthline.com/wp-content/uploads/2020/08/coffee-worlds-biggest-source-of-antioxidants-1296x728-feature_0-732x549.jpg","isChecked":false  },
+    { "id": 3, "count":0, "txt": "Coffee", "Category": "Beverages", "price": "14 EGP", "img": "https://foolproofliving.com/wp-content/uploads/2019/03/Turkish-Coffee-Recipe-Image-500x500.jpg",  "isChecked":false  }
+  ,{ "id": 4,"count": 0, "Category": "Food", "price":" 50 EGP", "txt": " chicken", "disc": "Coffe, Tea, Juice, etc...", "isChecked":false  },
+  { "id": 5,"count": 0, "txt": "beef", "Category": "Food", "price": " 40 EGP", "disc": "            Sandwich, Burger, Pizza, etc...",  "isChecked":false },
+  { "id": 6,"count": 0, "txt": "fish", "Category": "Food", "price": " 80 EGP", "isChecked":false  },
+  { "id": 7,"count": 0, "txt":"pizza", "Category": "Food", "price": " 90 EGP",  "isChecked":false }]
+  
+  
+  const [Products, setProducts] = useState('');
+  setProducts(productData)*/
   const cartItems = useSelector(state => state.cartItemsReducer)
 
   const navigation = useNavigation();
@@ -25,17 +38,17 @@ const screenOne = () => {
   const setCategories = item => dispatch({ type: SET_CATEGORIES, payload: item })
   const categories = useSelector(state => state.setCategoriesReducer)
   useEffect( ()=>{
-     fetch('http://192.168.1.6:3000/Categories')
+     fetch('http://10.1.50.130:3000/Categories')
     .then(res=>res.json())
-     .then(data=>setCategories(data))}); 
+     .then(data=>setCategories(data))},[]); 
      
-  
   useEffect( ()=>{
-     fetch('http://192.168.1.6:3000/Products')
+     fetch('http://10.1.50.130:3000/Products')
     .then(res=>res.json())
-    .then(data=>setProducts(data))});     
+    .then(data=>setProducts(data))},[]);     
   const setProducts = item => dispatch({ type: SET_PRODUCTS, payload: item })
   const Products = useSelector(state => state.setProductsReducer)
+
 
 const coffeeData=Products.filter(item => item.Category == "Beverages")
 

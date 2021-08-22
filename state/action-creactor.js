@@ -26,7 +26,7 @@ export const getMainDataAC =()=>{
 */
 
 
-const API_URL ='http://192.168.1.6:3000/data'
+const API_URL ='http://10.1.50.130:3000/data'
 
 export const setMainData = ()=>{
     try{

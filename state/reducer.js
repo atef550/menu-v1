@@ -19,6 +19,8 @@ const cartItemsReducer = (state = initialState.selectedItems, action) => {
 
         case REMOVE_FROM_CART:
       return state.filter(item => item.id != action.payload.id)
+
+      
     case DECREASE_AMOUNT:
       if (state.filter(item => item.id == action.payload.id)[0].count > 1) {
         state.filter(item => item.id == action.payload.id)[0].count--;
